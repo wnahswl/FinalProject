@@ -46,18 +46,15 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 		
 		//세션에 사용자 정보 저장
 		session.setAttribute("user", new SessionUser(member));
-	
-		
-		
+
 		return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(member.getRoleKey())),
 				attributes.getAttributes(), attributes.getNameAttributeKey());
 	}
 
 	private Member saveOrUpdate(OAuthAttributes attributes,String registrationId) {
 		Member member = memberRepository.findByEmailAndProvider(attributes.getEmail(), attributes.getProvider())
-				.map(entity -> entity.update(attributes.getName(),attributes.getPicture()))
-				.orElse(attributes.toEntity());
-		member.setProvider(registrationId);
+				.map(entity -> entity.update(attributes.getName(),attributes.getPicture(),attributes.getRole()))
+				.orElse(attributes.toEntity(registrationId));
 		memberRepository.save(member);
 		return member;
 	}

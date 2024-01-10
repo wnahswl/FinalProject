@@ -46,13 +46,19 @@ public class Member {
 		
 	}
 
-	public Member update(String name, String picture) {
+	public Member update(String name, String picture,Role role) {
 		this.name = name;
 		this.picture = picture;
+		if(this.role == Role.ROLE_GUEST)
+			this.role = Role.ROLE_USER;
 		return this;
 	}
 	public void setProvider(String provider) {
 		this.provider = provider;
+	}
+	
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getRoleKey() {

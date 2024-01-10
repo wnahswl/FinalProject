@@ -35,7 +35,7 @@ public class OAuthAttributes {
 	public static OAuthAttributes of(String registrationId, String userNameAttributeName,
 			Map<String, Object> attributes)   {
 		if(registrationId.equals("naver")) {
-		return ofNaver("id", attributes);
+		return ofNaver("id", attributes,registrationId);
 		}else if(registrationId.equals("kakao")) {
 			return ofKakao("id", attributes);
 		}else if(registrationId.equals("google")) {
@@ -60,15 +60,15 @@ public class OAuthAttributes {
 	}
 
 	// Naver
-	private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+	private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes,String provider) {
 		Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 		return OAuthAttributes.builder().name((String) response.get("name")).email((String) response.get("email"))
-				.picture((String) response.get("profile_image")).provider("provider").attributes(response)
+				.picture((String) response.get("profile_image")).provider(provider).attributes(response)
 				.nameAttributeKey(userNameAttributeName).build();
 	}
 
 	// 엔티티를 생성하는 시점은 처음 가입할 때,기본 권한을 Guest로 준다
-	public Member toEntity() {
-		return Member.builder().name(name).email(email).picture(picture).role(Role.GUEST).build();
+	public Member toEntity(String provider) {
+		return Member.builder().name(name).email(email).picture(picture).provider(provider).role(Role.ROLE_GUEST).build();
 	}
 }

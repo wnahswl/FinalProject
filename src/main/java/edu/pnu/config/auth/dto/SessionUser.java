@@ -3,6 +3,7 @@ package edu.pnu.config.auth.dto;
 import java.io.Serializable;
 
 import edu.pnu.domain.Member;
+import edu.pnu.domain.Role;
 import lombok.Getter;
 
 @Getter
@@ -16,11 +17,15 @@ public class SessionUser implements Serializable{
 	private String name;
 	private String email;
 	private String picture;
+	private String provider;
+	private Role role;
 	
 	public SessionUser(Member member) {
 		this.name = member.getName();
 		this.email = member.getEmail();
 		this.picture = member.getPicture();
+		this.provider = member.getProvider();
+		this.role = member.getRole();
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -47,9 +48,9 @@ public class SecurityConfig {
 		// Cors 구성 객체 생성
 		CorsConfiguration config = new CorsConfiguration();
 		// 특정 도메인 또는 IP 허용하도록 설정
-		
-		config.addAllowedOrigin("http://10.125.121.217:3000");//내 ip
-//		config.addAllowedOrigin("http://10.125.121.208:3000");
+
+//		config.addAllowedOrigin("http://10.125.121.217:3000");// 내 ip
+		config.addAllowedOrigin("http://10.125.121.208:3000");
 //		config.addAllowedOrigin("/*");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
@@ -60,6 +61,11 @@ public class SecurityConfig {
 
 		// CorsFilter 생성자가 UrlBasedCorsConfigurationSource를 받도록 변경
 		return source;
+	}
+
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 
 	@Bean

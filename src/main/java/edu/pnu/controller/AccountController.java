@@ -11,13 +11,16 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.pnu.config.Constant.SocialLoginType;
 import edu.pnu.config.auth.dto.SessionUser;
-import edu.pnu.service.ActiveUserStore;
+import edu.pnu.domain.Member;
+import edu.pnu.domain.Role;
 import edu.pnu.service.KakaoService;
+import edu.pnu.service.MemberService;
 import edu.pnu.service.NaverService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,7 +36,7 @@ public class AccountController {
 	private final NaverService naverService;
 	private final KakaoService kakaoService;
 	private final SessionRegistry registry;
-	private final ActiveUserStore activeUserStore;
+	private final MemberService memberService;
 
 	private String getUsernameFromSession(@AuthenticationPrincipal SessionUser sessionUser, HttpSession session) {
 		sessionUser = (SessionUser) session.getAttribute("user");
@@ -42,7 +45,7 @@ public class AccountController {
 
 	@GetMapping("/activeUser")
 	public List<String> getLoggedInUsers() {
-		return activeUserStore.getLoggedInUsers();
+		return memberService.getLoggedInUsers();
 	}
 
 	@GetMapping("/oauth/{socialLoginType}")
@@ -132,5 +135,17 @@ public class AccountController {
 			return ResponseEntity.ok("User is not logged in");
 		}
 	}
+	
+	//모든 회원 출력 메소드
+	@GetMapping("/members")
+	public List<Member> getAllMembers(){
+		return memberService.getAllMembers();
+	}
 
+	//회원 권한 변경
+	@PostMapping("/updateRole/{provider}/{id}")
+	public ResponseEntity<?> updateRole(@PathVariable String provider,@PathVariable String id,@RequestParam Role role) throws IllegalAccessException{
+		memberService.updateRole(provider,id,role);
+		return ResponseEntity.ok().build();
+	}
 }

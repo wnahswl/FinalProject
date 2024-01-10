@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import edu.pnu.domain.chat.ChatDto;
-import edu.pnu.service.ActiveUserStore;
+import edu.pnu.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ public class ChatController {
 
 	private final SimpMessagingTemplate messagingTemplate;
 	
-	private ActiveUserStore activeUserStore;
+	private MemberService activeUserStore;
 	
 	@MessageMapping("/chat/{id}")
 	public void sendMessage(@Payload ChatDto chatDto, @DestinationVariable Integer id) {

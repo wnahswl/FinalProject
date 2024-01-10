@@ -32,7 +32,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //
 //				String userInfo = oauthToken.getName();
 //				session.setAttribute("userInfo", userInfo);
-				response.sendRedirect("http://10.125.121.217:3000");
+//				response.sendRedirect("http://10.125.121.217:3000");
 //            }
         }
 

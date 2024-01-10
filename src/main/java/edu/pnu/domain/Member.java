@@ -51,6 +51,9 @@ public class Member {
 		this.picture = picture;
 		return this;
 	}
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
 
 	public String getRoleKey() {
 		return this.role.getKey();

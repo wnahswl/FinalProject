@@ -7,8 +7,7 @@ public interface SocialOauth {
 
 
 //	String getOauthRedirectURL(HttpServletRequest request);
-	String getOauthNaverRedirectURL(HttpSession session);
-	String getOauthGoogleRedirectURL(HttpSession session);
-	String getOauthKakaoRedirectURL(HttpSession session);
+	String getOauthRedirectURL(HttpSession session);
+
 	
 }

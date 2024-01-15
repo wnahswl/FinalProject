@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Component
 public class CustomeLogoutHandler implements LogoutSuccessHandler{
 
@@ -18,7 +19,7 @@ public class CustomeLogoutHandler implements LogoutSuccessHandler{
 			throws IOException, ServletException {
 		response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().flush();
-		
+		log.info("로그아웃 성공");
 	}
 
 }

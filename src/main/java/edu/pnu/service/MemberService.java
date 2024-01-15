@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import edu.pnu.domain.Member;
 import edu.pnu.domain.Role;
-import edu.pnu.dto.MemberDto;
 import edu.pnu.persistence.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +41,7 @@ public class MemberService {
 		activeUsers.remove(username);
 	}
 
-	public List<String> getLoggedInUsers() {
+	public List<List<String>> getLoggedInUsers() {
 		return sessionRegistry.getAllPrincipals().stream().filter(principal -> principal instanceof OAuth2User)
 				.map(principal -> {
 					OAuth2User oAuth2User = (OAuth2User) principal;
@@ -53,7 +51,7 @@ public class MemberService {
 							.collect(Collectors.toList());
 					// 여기서 필요에 따라 사용자의 세션 ID 목록을 추가로 처리할 수 있습니다.
 					log.info("현재 접속중인 모든 사용자 : {}", username);
-					return username;
+					return sessionIds;
 				}).collect(Collectors.toList());
 	}
 

@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 import edu.pnu.config.auth.dto.SessionUser;
 import edu.pnu.domain.PredictLogDomain;
 import edu.pnu.domain.reservior.AReservoir;
-import edu.pnu.dto.PredictLogDto;
 import edu.pnu.persistence.ARepository;
 import edu.pnu.persistence.PredictLogRepository;
 import jakarta.servlet.http.HttpSession;
@@ -35,18 +34,18 @@ public class PredictLogService {
 	
 	private final RestTemplate restTemplate;
 
-	public void logUserPredict(@AuthenticationPrincipal SessionUser sessionUser, HttpSession session, PredictLogDto dto)
+	public void logUserPredict(@AuthenticationPrincipal SessionUser sessionUser, HttpSession session,LocalDateTime predictTime, String poolCode  )
 			throws IllegalAccessException {
 		sessionUser = (SessionUser) session.getAttribute("user");
 		if (sessionUser != null) {
-			PredictLogDomain domain = new PredictLogDomain();
-			domain.setName(sessionUser.getName());
+			PredictLogDomain logDomain = new PredictLogDomain();
+			logDomain.setName(sessionUser.getName());
 			
-			domain.setPoolCode(dto.getPoolCode());
-			domain.setPredictTime(dto.getPredictTime());
+			logDomain.setPoolCode(poolCode);
+			logDomain.setPredictTime(predictTime);
 			
-			domain.setPresentTime(new Date());
-			logRepository.save(domain);
+			logDomain.setPresentTime(new Date());
+			logRepository.save(logDomain);
 		} else if (sessionUser == null) {
 			throw new IllegalAccessException("사용자 정보가 없습니다. ");
 		}

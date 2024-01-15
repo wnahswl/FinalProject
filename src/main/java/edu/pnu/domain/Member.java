@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +37,10 @@ public class Member {
 	
 	private String provider;
 	
+	//유저의 접속상태를 확인하는 필드
+	@Transient
+	private boolean isOnline;
+	
 	@Builder
 	public Member(String name, String email, String picture, Role role,String provider) {
 		this.name = name;
@@ -64,4 +69,10 @@ public class Member {
 	public String getRoleKey() {
 		return this.role.getKey();
 	}
+
+	public void setOnline(boolean isOnline) {
+		this.isOnline = isOnline;
+	}
+	
+	
 }

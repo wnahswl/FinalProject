@@ -1,13 +1,13 @@
 package edu.pnu.controller;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,16 +35,10 @@ public class AccountController {
 
 	private final NaverService naverService;
 	private final KakaoService kakaoService;
-	private final SessionRegistry registry;
 	private final MemberService memberService;
 
-	private String getUsernameFromSession(@AuthenticationPrincipal SessionUser sessionUser, HttpSession session) {
-		sessionUser = (SessionUser) session.getAttribute("user");
-		return sessionUser.getName();
-	}
-
 	@GetMapping("/activeUser")
-	public List<String> getLoggedInUsers() {
+	public List<List<String>> getLoggedInUsers() {
 		return memberService.getLoggedInUsers();
 	}
 
@@ -89,7 +83,7 @@ public class AccountController {
 		session.setAttribute("memberInfo", memberInfo);
 		log.info("getSession '{}' added to session ", session.getAttribute("memberInfo"));
 
-//		response.sendRedirect("https://www.naver.com");
+
 
 		return ResponseEntity.ok(memberInfo);
 	}
@@ -108,26 +102,12 @@ public class AccountController {
 		}
 	}
 
-	// logout에 문제가 생김
-	// 캐시 쿠기 제거하고 나서 됐음
-	@GetMapping("/logout1")
-	public ResponseEntity<?> logout(@AuthenticationPrincipal SessionUser sessionUser,HttpServletRequest request) throws IOException {
-		HttpSession session = request.getSession();
-		log.info("로그아웃 시도 ");
-		if (session == null) {
-			return ResponseEntity.ok(HttpStatus.NOT_ACCEPTABLE);
-		} else if(session !=null){
-			String username = getUsernameFromSession(sessionUser, session);
-			registry.removeSessionInformation(session.getId());
-			session.invalidate();
-		}
-		// 세션 전부 무효화
-		return ResponseEntity.ok("토큰삭제 성공");
-	}
-
 	@GetMapping("/check-login-status")
 	public ResponseEntity<?> checkLoginStatus(@AuthenticationPrincipal OAuth2User oAuth2User) {
-		if (oAuth2User != null) {
+		
+		if (oAuth2User != null) {	
+			Collection<? extends GrantedAuthority> role = oAuth2User.getAuthorities();
+			log.info("유저의 권한 : {} " , role);
 			// 사용자는 로그인 상태
 			return ResponseEntity.ok("User is logged in");
 		} else {
@@ -142,10 +122,10 @@ public class AccountController {
 		return memberService.getAllMembers();
 	}
 
-	//회원 권한 변경
+	//회원 권한 변경 URL에 직접적으로 추가
 	@PostMapping("/updateRole/{provider}/{id}")
 	public ResponseEntity<?> updateRole(@PathVariable String provider,@PathVariable String id,@RequestParam Role role) throws IllegalAccessException{
 		memberService.updateRole(provider,id,role);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("Change role successfully");
 	}
 }

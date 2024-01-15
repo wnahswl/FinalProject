@@ -6,12 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.pnu.config.auth.dto.SessionUser;
-import edu.pnu.dto.PredictLogDto;
 import edu.pnu.service.PredictLogService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +26,9 @@ public class PredictController {
 	}
 	
 	@PostMapping("/predict")
-	ResponseEntity<?> predictLog(@AuthenticationPrincipal SessionUser sessionUser,HttpSession session ,@RequestBody PredictLogDto dto) throws IllegalAccessException{
+	ResponseEntity<?> predictLog(@AuthenticationPrincipal SessionUser sessionUser,HttpSession session ,@RequestParam LocalDateTime predictTime,@RequestParam String poolCode) throws IllegalAccessException{
 		sessionUser = (SessionUser) session.getAttribute("user");
-		predictLogService.logUserPredict(sessionUser, session, dto);
+		predictLogService.logUserPredict(sessionUser, session, predictTime,poolCode);
 		return ResponseEntity.ok("ok");
 	}
 

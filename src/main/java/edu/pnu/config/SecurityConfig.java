@@ -27,6 +27,7 @@ public class SecurityConfig {
 	private final CustomOAuth2UserService service;
 	private final CustomeLogoutHandler logoutHandler;
 
+	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -35,7 +36,7 @@ public class SecurityConfig {
 				.formLogin(frmLogin -> frmLogin.disable()).httpBasic(basic -> basic.disable())
 				.sessionManagement(ssmn -> ssmn.maximumSessions(1).sessionRegistry(sessionRegistry()))
 				.oauth2Login(oauth2 -> oauth2.loginPage("/login").userInfoEndpoint(user -> user.userService(service))
-						.successHandler(new CustomAuthenticationSuccessHandler(authorizedClientService)))
+						.successHandler(new CustomLoginHandler(authorizedClientService)))
 				.logout(oauth -> oauth.logoutUrl("/logout").logoutSuccessHandler(logoutHandler)
 						.deleteCookies("JSESSIONID"));
 		return http.build();
@@ -49,8 +50,8 @@ public class SecurityConfig {
 		CorsConfiguration config = new CorsConfiguration();
 		// 특정 도메인 또는 IP 허용하도록 설정
 
-//		config.addAllowedOrigin("http://10.125.121.217:3000");// 내 ip
-		config.addAllowedOrigin("http://10.125.121.208:3000");
+		config.addAllowedOrigin("http://10.125.121.217:3000");// 내 ip
+//		config.addAllowedOrigin("http://10.125.121.208:3000");
 //		config.addAllowedOrigin("/*");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
@@ -62,6 +63,8 @@ public class SecurityConfig {
 		// CorsFilter 생성자가 UrlBasedCorsConfigurationSource를 받도록 변경
 		return source;
 	}
+
+	
 
 	@Bean
 	RestTemplate restTemplate() {
@@ -77,4 +80,6 @@ public class SecurityConfig {
 	SessionAuthenticationStrategy sessionAuthenticationStrategy(SessionRegistry sessionRegistry) {
 		return new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry);
 	}
+	
+
 }

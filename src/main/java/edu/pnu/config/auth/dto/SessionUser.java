@@ -19,6 +19,7 @@ public class SessionUser implements Serializable{
 	private String picture;
 	private String provider;
 	private Role role;
+	private boolean isOnline;
 	
 	public SessionUser(Member member) {
 		this.name = member.getName();
@@ -26,6 +27,7 @@ public class SessionUser implements Serializable{
 		this.picture = member.getPicture();
 		this.provider = member.getProvider();
 		this.role = member.getRole();
+		this.isOnline =member.isOnline();
 	}
 
 }

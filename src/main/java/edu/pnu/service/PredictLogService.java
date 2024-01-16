@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import edu.pnu.config.auth.dto.SessionUser;
+import edu.pnu.domain.Reservoir;
 import edu.pnu.domain.PredictLogDomain;
-import edu.pnu.domain.reservior.AReservoir;
 import edu.pnu.persistence.ARepository;
 import edu.pnu.persistence.PredictLogRepository;
 import jakarta.servlet.http.HttpSession;
@@ -58,17 +58,17 @@ public class PredictLogService {
 		Pageable previousDataPageable = PageRequest.of(0, 144, Sort.by("dateTime").descending());
 		Pageable nextDataPageable = PageRequest.of(0, 144, Sort.by("dateTime"));
 
-		List<AReservoir> values = new ArrayList<>();
+		List<Reservoir> values = new ArrayList<>();
 
 		Map<String, Object> requestData = new HashMap<>();
 
 		if (pool.equals("A")) {
-			List<AReservoir> beforeData = aRepo.findBeforeDate(date, previousDataPageable);
+			List<Reservoir> beforeData = aRepo.findBeforeDate(date, previousDataPageable);
 
 			// 역정렬된 데이터를 오름차순으로 재정렬
 			Collections.reverse(beforeData);
 
-			List<AReservoir> fromData = aRepo.findFromDate(date, nextDataPageable);
+			List<Reservoir> fromData = aRepo.findFromDate(date, nextDataPageable);
 
 			values.addAll(beforeData);
 			values.addAll(fromData);

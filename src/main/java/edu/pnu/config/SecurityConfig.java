@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import edu.pnu.handler.CustomLoginHandler;
+import edu.pnu.handler.CustomLogoutHandler;
 import edu.pnu.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +27,7 @@ public class SecurityConfig {
 
 	private final OAuth2AuthorizedClientService authorizedClientService;
 	private final CustomOAuth2UserService service;
-	private final CustomeLogoutHandler logoutHandler;
+	private final CustomLogoutHandler logoutHandler;
 
 	
 	@Bean

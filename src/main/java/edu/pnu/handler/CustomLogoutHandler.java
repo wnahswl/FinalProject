@@ -1,4 +1,4 @@
-package edu.pnu.config;
+package edu.pnu.handler;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
-public class CustomeLogoutHandler implements LogoutSuccessHandler{
+public class CustomLogoutHandler implements LogoutSuccessHandler{
 
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)

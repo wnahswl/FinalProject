@@ -61,12 +61,10 @@
 # 서비스 화면
 <details>
     <summary>자세히</summary>
-![1](https://github.com/wnahswl/FinalProject/assets/65122056/eb4690a1-8598-4297-9ef8-e9e3edfe3b15)
-![2](https://github.com/wnahswl/FinalProject/assets/65122056/4a3dc66c-a796-4b0a-acc1-e2a728a0fe18)
-![3](https://github.com/wnahswl/FinalProject/assets/65122056/34d15d73-ffae-46c8-8a40-c63432f7a54e)
-![4](https://github.com/wnahswl/FinalProject/assets/65122056/441ca33c-30aa-4df2-9076-7533c5759e33)
-![peak](https://github.com/wnahswl/FinalProject/assets/65122056/9beb43c5-e016-482a-a861-23274d3ad031)
-
+<img src="https://github.com/wnahswl/FinalProject/assets/65122056/14e027d8-0c3e-4911-98d2-7d9218501560"></img>
+<img src="https://github.com/wnahswl/FinalProject/assets/65122056/57c812e6-d389-4ad3-8cee-92f18be2e482"></img>
+<img src="https://github.com/wnahswl/FinalProject/assets/65122056/e45954c9-fe0f-4c59-8af9-23995d2cd5d9"></img>
+<img src="https://github.com/wnahswl/FinalProject/assets/65122056/2c83aca5-5d8f-4b6e-a902-000c47b09ccc"></img>
 
 
 

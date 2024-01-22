@@ -14,6 +14,7 @@
 <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> 
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/flask-000000?style=for-the-badge&logo=flask&logoColor=white">
 </div>
 
 # 참여 기업
@@ -26,3 +27,6 @@
 
 전력단가가 낮은 밤 시간대에 효율적인 펌프 운영을 하여 8시 전에 만수위를 유지하고자 한다.
 밤과 낮의 전력단가는 약 3배 차이난다.
+
+[월별전기사용량]![월별전기사용량](https://github.com/wnahswl/FinalProject/assets/65122056/8ec511d3-745a-412f-aeef-fc027db35226)
+

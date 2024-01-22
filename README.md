@@ -15,3 +15,14 @@
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 </div>
+
+# 참여 기업
+마인드원(주)
+
+# 필요성
+수요량 예측 데이터를 토대로 효율적인 펌프 운영
+
+## 문제점
+
+전력단가가 낮은 밤 시간대에 효율적인 펌프 운영을 하여 8시 전에 만수위를 유지하고자 한다.
+밤과 낮의 전력단가는 약 3배 차이난다.

@@ -56,6 +56,21 @@
 >
 >매년 8월~9월이 사용량이 peak인걸 알 수 있다.
 >날씨, 계절, 요일에 따라 배수지의 수요량은 달라진다.
+>
+
+# 서비스 화면
+<details>
+    <summary>자세히</summary>
+![1](https://github.com/wnahswl/FinalProject/assets/65122056/eb4690a1-8598-4297-9ef8-e9e3edfe3b15)
+![2](https://github.com/wnahswl/FinalProject/assets/65122056/4a3dc66c-a796-4b0a-acc1-e2a728a0fe18)
+![3](https://github.com/wnahswl/FinalProject/assets/65122056/34d15d73-ffae-46c8-8a40-c63432f7a54e)
+![4](https://github.com/wnahswl/FinalProject/assets/65122056/441ca33c-30aa-4df2-9076-7533c5759e33)
+![peak](https://github.com/wnahswl/FinalProject/assets/65122056/9beb43c5-e016-482a-a861-23274d3ad031)
+
+
+
+
+</details>
 
 
 
